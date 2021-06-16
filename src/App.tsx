@@ -1,8 +1,8 @@
 import React from "react";
-import Tasks from "./components/sections/Tasks";
+import Main from "./components/sections/Main";
 
 function App() {
-  return <Tasks />;
+  return <Main />;
 }
 
 export default App;

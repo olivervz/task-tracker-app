@@ -1,0 +1,64 @@
+.add-task-form {
+  position: fixed;
+  left: calc(50vw - 250px);
+  width: 500px;
+  height: 260px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.task-name-input {
+  padding: 0px;
+  margin-top: 20px;
+  margin-left: 19px;
+  width: 92%;
+  height: 15%;
+  font-size: 20px;
+}
+
+.add-task-form-footer {
+  margin-left: 19px;
+  width: 464px;
+  height: 50px;
+}
+
+.submit-button {
+  height: 40px;
+  width: 128px;
+  font-size: 16px;
+  color: white;
+  background: green;
+  border: 1px solid white;
+  margin-top: 10px;
+  margin-right: 208px;
+}
+
+.submit-button:hover {
+  cursor: pointer;
+  background: rgb(0, 105, 0);
+  transform: scale(1.003);
+  transition: all 0.8s ease;
+}
+
+.cancel-button {
+  height: 40px;
+  width: 128px;
+  font-size: 16px;
+  border: 1px solid red;
+  color: red;
+  background: white;
+  margin-top: 10px;
+}
+
+.cancel-button:hover {
+  cursor: pointer;
+  background: rgb(253, 251, 251);
+  transform: scale(1.003);
+  transition: all 0.8s ease;
+}
+
+.font {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+}
