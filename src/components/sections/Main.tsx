@@ -12,6 +12,7 @@ const Main = () => {
     ID: number;
   };
   const [addTask, setAddTask] = useState(false);
+  const [numTasks, setNumTasks] = useState(0);
   const [tasksState, setTasksState] = useState<task[]>([]);
 
   useEffect(() => {
@@ -19,8 +20,9 @@ const Main = () => {
       const data = await fetchTasks();
       setTasks(data);
     };
+    console.log("asdf");
     getTasks();
-  }, []);
+  }, [numTasks]);
 
   const fetchTasks = async () => {
     const response = await fetch("http://localhost:4000/tasks");
@@ -46,16 +48,40 @@ const Main = () => {
     description: string
   ) => {
     setAddTask(false);
-
-    console.log("add task");
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        task: {
+          name: name,
+          date: date,
+          description: description,
+        },
+      }),
+    };
+    const response = await fetch(
+      "http://localhost:4000/addtask",
+      requestOptions
+    );
+    setNumTasks(numTasks + 1);
+    console.log("add", numTasks);
   };
 
   const taskCancel = () => {
     setAddTask(false);
   };
 
-  const taskDelete = (taskID: number) => {
-    console.log("delete", taskID);
+  const taskDelete = async (taskID: number) => {
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "applications/json" },
+    };
+    const response = await fetch(
+      "http://localhost:4000/" + taskID,
+      requestOptions
+    );
+    setNumTasks(numTasks - 1);
+    console.log("del", numTasks);
   };
 
   return (

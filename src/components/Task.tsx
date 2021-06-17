@@ -21,7 +21,8 @@ const Task: React.FC<Props> = (props) => {
       <div className="task-date font">{props.date}</div>
       <button
         className="task-delete font"
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           props.delete(props.ID);
         }}
       >
