@@ -2,7 +2,7 @@ import React from "react";
 import Tasks from "../Tasks";
 import AddTask from "../AddTask";
 import "./Main.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const Main = () => {
   type task = {
