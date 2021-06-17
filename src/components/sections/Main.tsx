@@ -36,7 +36,7 @@ const Main = () => {
   };
 
   const taskDelete = (taskID: number) => {
-    console.log("delete task #", taskID);
+    setTasks(tasks.filter((task) => task.ID != taskID));
   };
 
   return (

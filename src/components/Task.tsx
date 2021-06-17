@@ -17,7 +17,6 @@ const Task: React.FC<Props> = (props) => {
       <button
         className="task-delete font"
         onClick={() => {
-          console.log(props.ID);
           props.delete(props.ID);
         }}
       >
