@@ -19,7 +19,11 @@ const Main = () => {
     setAddTask(!addTask);
   };
 
-  const taskSubmit = (name: string, date: string, description: string) => {
+  const taskSubmit = async (
+    name: string,
+    date: string,
+    description: string
+  ) => {
     const task = {
       name: name,
       date: date,
@@ -29,6 +33,10 @@ const Main = () => {
     setTasks([...tasks, task]);
     setID(ID + 1);
     setAddTask(false);
+
+    const response = await fetch("http://localhost:4000/data");
+    const data = await response.json();
+    console.log(data);
   };
 
   const taskCancel = () => {
