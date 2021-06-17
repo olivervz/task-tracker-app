@@ -2,7 +2,7 @@ import React from "react";
 import Tasks from "../Tasks";
 import AddTask from "../AddTask";
 import "./Main.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Main = () => {
   type task = {
@@ -12,8 +12,29 @@ const Main = () => {
     ID: number;
   };
   const [addTask, setAddTask] = useState(false);
-  const [tasks, setTasks] = useState<task[]>([]);
-  const [ID, setID] = useState(0);
+  const [tasksState, setTasksState] = useState<task[]>([]);
+
+  useEffect(() => {
+    const getTasks = async () => {
+      const data = await fetchTasks();
+      setTasks(data);
+    };
+    getTasks();
+  }, []);
+
+  const fetchTasks = async () => {
+    const response = await fetch("http://localhost:4000/tasks");
+    const data = await response.json();
+    return data;
+  };
+
+  const setTasks = async (data: any) => {
+    const tasks: task[] = [];
+    for (var i = 0; i < Object.keys(data.tasks).length; ++i) {
+      tasks.push(data.tasks[i]);
+    }
+    setTasksState(tasks);
+  };
 
   const handleAddTask = () => {
     setAddTask(!addTask);
@@ -24,19 +45,9 @@ const Main = () => {
     date: string,
     description: string
   ) => {
-    const task = {
-      name: name,
-      date: date,
-      description: description,
-      ID: ID,
-    };
-    setTasks([...tasks, task]);
-    setID(ID + 1);
     setAddTask(false);
 
-    const response = await fetch("http://localhost:4000/data");
-    const data = await response.json();
-    console.log(data);
+    console.log("add task");
   };
 
   const taskCancel = () => {
@@ -44,7 +55,7 @@ const Main = () => {
   };
 
   const taskDelete = (taskID: number) => {
-    setTasks(tasks.filter((task) => task.ID != taskID));
+    console.log("delete", taskID);
   };
 
   return (
@@ -63,7 +74,7 @@ const Main = () => {
       ) : (
         ""
       )}
-      <Tasks tasks={tasks} delete={taskDelete} />
+      <Tasks tasks={tasksState} delete={taskDelete} />
     </div>
   );
 };
