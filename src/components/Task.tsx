@@ -1,17 +1,28 @@
 import React from "react";
+import "./Task.css";
 
 interface Props {
-  taskName: string;
-  taskDate: string;
-  taskDescription: string;
+  name: string;
+  date: string;
+  description: string;
+  ID: number;
+  delete: Function;
 }
 
 const Task: React.FC<Props> = (props) => {
   return (
-    <div style={{ width: 200, height: 200, backgroundColor: "blue" }}>
-      <h1 className="title">{props.taskName}</h1>
-      <h2 className="date">{props.taskDate}</h2>
-      <h3 className="description">{props.taskDescription}</h3>
+    <div className="task">
+      <div className="task-title font">{props.name}</div>
+      <div className="task-date font">{props.date}</div>
+      <button
+        className="task-delete font"
+        onClick={() => {
+          console.log(props.ID);
+          props.delete(props.ID);
+        }}
+      >
+        X
+      </button>
     </div>
   );
 };

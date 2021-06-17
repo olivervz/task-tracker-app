@@ -5,18 +5,38 @@ import "./Main.css";
 import { useState, useEffect } from "react";
 
 const Main = () => {
+  type task = {
+    name: string;
+    date: string;
+    description: string;
+    ID: number;
+  };
   const [addTask, setAddTask] = useState(false);
+  const [tasks, setTasks] = useState<task[]>([]);
+  const [ID, setID] = useState(0);
 
   const handleAddTask = () => {
     setAddTask(!addTask);
   };
 
-  const taskSubmit = () => {
+  const taskSubmit = (name: string, date: string, description: string) => {
+    const task = {
+      name: name,
+      date: date,
+      description: description,
+      ID: ID,
+    };
+    setTasks([...tasks, task]);
+    setID(ID + 1);
     setAddTask(false);
   };
 
   const taskCancel = () => {
     setAddTask(false);
+  };
+
+  const taskDelete = (taskID: number) => {
+    console.log("delete task #", taskID);
   };
 
   return (
@@ -35,7 +55,7 @@ const Main = () => {
       ) : (
         ""
       )}
-      <Tasks />
+      <Tasks tasks={tasks} delete={taskDelete} />
     </div>
   );
 };
