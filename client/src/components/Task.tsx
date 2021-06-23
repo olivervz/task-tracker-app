@@ -6,7 +6,7 @@ interface Props {
   name: string;
   date: string;
   description: string;
-  ID: number;
+  id: number;
   delete: Function;
 }
 
@@ -23,7 +23,7 @@ const Task: React.FC<Props> = (props) => {
         className="task-delete font"
         onClick={(e) => {
           e.stopPropagation();
-          props.delete(props.ID);
+          props.delete(props.id);
         }}
       >
         X
@@ -36,7 +36,7 @@ const Task: React.FC<Props> = (props) => {
       <button
         className="task-delete font"
         onClick={() => {
-          props.delete(props.ID);
+          props.delete(props.id);
         }}
       >
         X

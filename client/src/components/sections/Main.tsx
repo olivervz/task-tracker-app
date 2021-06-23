@@ -1,6 +1,7 @@
 import React from "react";
 import Tasks from "../Tasks";
 import AddTask from "../AddTask";
+import Axios from "axios";
 import "./Main.css";
 import { useState, useEffect } from "react";
 
@@ -9,20 +10,17 @@ const Main = () => {
     name: string;
     date: string;
     description: string;
-    ID: number;
+    id: number;
   };
   const [addTask, setAddTask] = useState(false);
-  const [numTasks, setNumTasks] = useState(0);
   const [tasksState, setTasksState] = useState<task[]>([]);
 
   useEffect(() => {
-    const getTasks = async () => {
-      const data = await fetchTasks();
-      setTasks(data);
-    };
-    console.log("asdf");
-    getTasks();
-  }, [numTasks]);
+    const url = "http://localhost:3001/api/get";
+    Axios.get(url).then((response) => {
+      setTasksState(response.data);
+    });
+  }, [tasksState]);
 
   const fetchTasks = async () => {
     const response = await fetch("http://localhost:4000/tasks");
@@ -42,29 +40,14 @@ const Main = () => {
     setAddTask(!addTask);
   };
 
-  const taskSubmit = async (
-    name: string,
-    date: string,
-    description: string
-  ) => {
+  const taskSubmit = (name: string, date: string, description: string) => {
+    const url = "http://localhost:3001/api/insert";
+    Axios.post(url, {
+      name: name,
+      date: date,
+      description: description,
+    });
     setAddTask(false);
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        task: {
-          name: name,
-          date: date,
-          description: description,
-        },
-      }),
-    };
-    const response = await fetch(
-      "http://localhost:4000/addtask",
-      requestOptions
-    );
-    setNumTasks(numTasks + 1);
-    console.log("add", numTasks);
   };
 
   const taskCancel = () => {
@@ -72,16 +55,8 @@ const Main = () => {
   };
 
   const taskDelete = async (taskID: number) => {
-    const requestOptions = {
-      method: "DELETE",
-      headers: { "Content-Type": "applications/json" },
-    };
-    const response = await fetch(
-      "http://localhost:4000/" + taskID,
-      requestOptions
-    );
-    setNumTasks(numTasks - 1);
-    console.log("del", numTasks);
+    const url = `http://localhost:3001/api/delete/${taskID}`;
+    Axios.delete(url);
   };
 
   return (

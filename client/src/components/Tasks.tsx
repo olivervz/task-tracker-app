@@ -7,7 +7,7 @@ type task = {
   name: string;
   date: string;
   description: string;
-  ID: number;
+  id: number;
 };
 interface Props {
   tasks: task[];
@@ -22,7 +22,7 @@ const Tasks: React.FC<Props> = (props) => {
           name={task.name}
           date={task.date}
           description={task.description}
-          ID={task.ID}
+          id={task.id}
           delete={props.delete}
         />
       ))}
