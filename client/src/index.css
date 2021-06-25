@@ -8,6 +8,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+  font-family: "MontserratMedium";
+  src: local("MontserratMedium"),
+    url("./fonts/Montserrat/Montserrat-Medium.ttf") format("truetype");
+  font-weight: medium;
+}
+
+@font-face {
+  font-family: "MontserratBold";
+  src: local("MontserratBold"),
+    url("./fonts/Montserrat/Montserrat-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "MontserratThin";
+  src: local("MontserratThin"),
+    url("./fonts/Montserrat/Montserrat-Thin.ttf") format("truetype");
+  font-weight: thin;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
