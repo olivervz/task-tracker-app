@@ -19,6 +19,7 @@ const Task: React.FC<Props> = (props) => {
   const [displayUpdateField, setDisplayUpdateField] = useState(false);
   const [field, setField] = useState("");
   const [fieldValue, setFieldValue] = useState("");
+  const APIurl = "https://task-list-tracker.herokuapp.com";
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
@@ -44,8 +45,8 @@ const Task: React.FC<Props> = (props) => {
 
   const submitUpdate = (value: string) => {
     setDisplayUpdateField(false);
-    console.log(value);
-    Axios.put("http://localhost:3001/api/update", {
+    const url = APIurl + "/api/update";
+    Axios.put(url, {
       field: field,
       value: value,
       id: props.id,

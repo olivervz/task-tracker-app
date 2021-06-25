@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const mysql = require("mysql");
+const PORT = process.env.PORT || 3001;
 
 const db = mysql.createPool({
   host: "localhost",
@@ -14,6 +15,10 @@ const db = mysql.createPool({
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get("/test", (req, res) => {
+  res.send("Works!");
+});
 
 app.get("/api/get", (req, res) => {
   const sqlSelect = "SELECT * FROM tasks ORDER BY date";
@@ -73,6 +78,6 @@ app.put("/api/update", (req, res) => {
   });
 });
 
-app.listen(3001, () => {
-  console.log("listening on port 3001");
+app.listen(PORT, () => {
+  console.log("hello");
 });
