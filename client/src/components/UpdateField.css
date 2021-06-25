@@ -1,0 +1,17 @@
+.update-field-form {
+  position: fixed;
+  left: calc(50vw - 250px);
+  width: 500px;
+  height: 130px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.update-field-input {
+  padding: 0px;
+  margin-top: 20px;
+  margin-left: 19px;
+  width: 92%;
+  height: 30%;
+  font-size: 20px;
+}

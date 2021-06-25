@@ -9,6 +9,7 @@ const Main = () => {
   type task = {
     name: string;
     date: string;
+    datestring: string;
     description: string;
     id: number;
   };
@@ -16,24 +17,18 @@ const Main = () => {
   const [tasksState, setTasksState] = useState<task[]>([]);
 
   useEffect(() => {
+    fetchTasks();
+  }, [tasksState]);
+
+  const fetchTasks = () => {
     const url = "http://localhost:3001/api/get";
     Axios.get(url).then((response) => {
       setTasksState(response.data);
     });
-  }, [tasksState]);
-
-  const fetchTasks = async () => {
-    const response = await fetch("http://localhost:4000/tasks");
-    const data = await response.json();
-    return data;
   };
 
-  const setTasks = async (data: any) => {
-    const tasks: task[] = [];
-    for (var i = 0; i < Object.keys(data.tasks).length; ++i) {
-      tasks.push(data.tasks[i]);
-    }
-    setTasksState(tasks);
+  const updateFieldCallback = () => {
+    fetchTasks();
   };
 
   const handleAddTask = () => {
@@ -75,7 +70,11 @@ const Main = () => {
       ) : (
         ""
       )}
-      <Tasks tasks={tasksState} delete={taskDelete} />
+      <Tasks
+        tasks={tasksState}
+        delete={taskDelete}
+        updateFieldCallback={updateFieldCallback}
+      />
     </div>
   );
 };

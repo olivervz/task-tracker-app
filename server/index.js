@@ -54,17 +54,24 @@ app.delete("/api/delete/:id", (req, res) => {
   });
 });
 
-// app.put("/api/update", (req, res) => {
-//   const name = req.body.movieName;
-//   const review = req.body.movieReview;
-//   console.log(review, name);
-//   const sqlUpdate =
-//     "UPDATE movie_reviews SET movieReview = ? WHERE movieName = ?";
+app.put("/api/update", (req, res) => {
+  const value = req.body.value;
+  const field = req.body.field;
+  const id = req.body.id;
+  console.log(value, field, id);
+  var sqlUpdate = "";
+  if (field === "name") {
+    sqlUpdate = "UPDATE tasks SET name = ? WHERE id = ?";
+  } else if (field === "datestring") {
+    sqlUpdate = "UPDATE tasks SET datestring = ? WHERE id = ?";
+  } else {
+    sqlUpdate = "UPDATE tasks SET description = ? WHERE id = ?";
+  }
 
-//   db.query(sqlUpdate, [review, name], (err, result) => {
-//     if (err) console.log(err);
-//   });
-// });
+  db.query(sqlUpdate, [value, id], (err, result) => {
+    if (err) console.log(err);
+  });
+});
 
 app.listen(3001, () => {
   console.log("listening on port 3001");
