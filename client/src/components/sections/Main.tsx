@@ -15,11 +15,12 @@ const Main = () => {
   };
   const [addTask, setAddTask] = useState(false);
   const [tasksState, setTasksState] = useState<task[]>([]);
-  const APIurl = "https://task-list-tracker.herokuapp.com";
+  // const APIurl = "https://task-list-tracker.herokuapp.com";
+  const APIurl = "http://localhost:3001";
 
   useEffect(() => {
     fetchTasks();
-  }, [tasksState]);
+  }, []);
 
   const fetchTasks = () => {
     const url = APIurl + "/api/get";
@@ -42,8 +43,10 @@ const Main = () => {
       name: name,
       date: date,
       description: description,
+    }).then((result) => {
+      setAddTask(false);
+      fetchTasks();
     });
-    setAddTask(false);
   };
 
   const taskCancel = () => {
@@ -52,7 +55,9 @@ const Main = () => {
 
   const taskDelete = async (taskID: number) => {
     const url = APIurl + `/api/delete/${taskID}`;
-    Axios.delete(url);
+    Axios.delete(url).then((result) => {
+      fetchTasks();
+    });
   };
 
   return (

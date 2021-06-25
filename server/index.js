@@ -11,6 +11,12 @@ const db = mysql.createPool({
   password: "password",
   database: "tasksdb",
 });
+// const db = mysql.createPool({
+//   host: "us-cdbr-east-04.cleardb.com",
+//   user: "b3a38aebcb54d9",
+//   password: "4ff73320",
+//   database: "heroku_24cf52c9bb780c1",
+// });
 
 app.use(cors());
 app.use(express.json());
@@ -42,7 +48,7 @@ app.post("/api/insert", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+      res.send(result);
     }
   });
 });
@@ -54,7 +60,7 @@ app.delete("/api/delete/:id", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+      res.send(result);
     }
   });
 });
@@ -63,7 +69,6 @@ app.put("/api/update", (req, res) => {
   const value = req.body.value;
   const field = req.body.field;
   const id = req.body.id;
-  console.log(value, field, id);
   var sqlUpdate = "";
   if (field === "name") {
     sqlUpdate = "UPDATE tasks SET name = ? WHERE id = ?";
@@ -74,10 +79,14 @@ app.put("/api/update", (req, res) => {
   }
 
   db.query(sqlUpdate, [value, id], (err, result) => {
-    if (err) console.log(err);
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
   });
 });
 
 app.listen(PORT, () => {
-  console.log("hello");
+  console.log("listening on port: ", PORT);
 });
