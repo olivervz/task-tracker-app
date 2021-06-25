@@ -56,9 +56,9 @@ const Main = () => {
 
   return (
     <div>
-      <div className="heading font">
-        <div className="title">Task Tracker </div>
-        <button className="add-task font" onClick={() => handleAddTask()}>
+      <div className="heading">
+        <div className="title font-title">Task Tracker </div>
+        <button className="add-task font-title" onClick={() => handleAddTask()}>
           Add Task
         </button>
       </div>

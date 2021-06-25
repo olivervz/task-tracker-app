@@ -92,7 +92,7 @@ const Task: React.FC<Props> = (props) => {
         {props.datestring}
       </div>
       <button
-        className="task-delete font"
+        className="task-delete font-delete"
         onClick={(e) => {
           e.stopPropagation();
           props.delete(props.id);
@@ -123,8 +123,9 @@ const Task: React.FC<Props> = (props) => {
         {props.datestring}
       </div>
       <button
-        className="task-delete font"
-        onClick={() => {
+        className="task-delete font-delete"
+        onClick={(e) => {
+          e.stopPropagation();
           props.delete(props.id);
         }}
       >
