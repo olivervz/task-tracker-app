@@ -58,6 +58,19 @@ const Task: React.FC<Props> = (props) => {
     var date: Date = new Date(props.date);
     return today > date;
   };
+  const isToday = () => {
+    var today: Date = new Date();
+    var date: Date = new Date(props.date);
+    if (
+      today.getMonth() === date.getMonth() &&
+      today.getDay() === date.getDay() &&
+      today.getFullYear() === date.getFullYear()
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   const updateFieldPopup = (
     <>
@@ -95,7 +108,7 @@ const Task: React.FC<Props> = (props) => {
           updateDate();
         }}
         style={{
-          color: pastDue() ? "red" : "white",
+          color: isToday() ? "green" : pastDue() ? "red" : "white",
         }}
       >
         {props.datestring}
@@ -127,6 +140,9 @@ const Task: React.FC<Props> = (props) => {
         onClick={(e) => {
           e.stopPropagation();
           updateDate();
+        }}
+        style={{
+          color: isToday() ? "green" : pastDue() ? "red" : "white",
         }}
       >
         {props.datestring}

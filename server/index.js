@@ -29,10 +29,11 @@ app.get("/api/get", (req, res) => {
 app.post("/api/insert", (req, res) => {
   const name = req.body.name;
   const description = req.body.description;
+  const datestring = req.body.date;
   const date = new Date(req.body.date);
   const sqlInsert =
-    "INSERT INTO tasks (name, date, description) VALUES (?,?,?);";
-  db.query(sqlInsert, [name, date, description], (err, result) => {
+    "INSERT INTO tasks (name, date, datestring, description) VALUES (?,?,?,?);";
+  db.query(sqlInsert, [name, date, datestring, description], (err, result) => {
     if (err) {
       console.log(err);
     } else {
