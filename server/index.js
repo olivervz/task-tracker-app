@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/api/get", (req, res) => {
-  const sqlSelect = "SELECT * FROM tasks";
+  const sqlSelect = "SELECT * FROM tasks ORDER BY date";
   db.query(sqlSelect, (err, result) => {
     if (err) {
       console.log(err);
@@ -28,11 +28,10 @@ app.get("/api/get", (req, res) => {
 
 app.post("/api/insert", (req, res) => {
   const name = req.body.name;
-  const date = req.body.date;
   const description = req.body.description;
-
+  const date = new Date(req.body.date);
   const sqlInsert =
-    "INSERT INTO tasks (name, datestring, description) VALUES (?,?,?);";
+    "INSERT INTO tasks (name, date, description) VALUES (?,?,?);";
   db.query(sqlInsert, [name, date, description], (err, result) => {
     if (err) {
       console.log(err);

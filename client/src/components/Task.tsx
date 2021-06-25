@@ -53,6 +53,12 @@ const Task: React.FC<Props> = (props) => {
     props.updateFieldCallback();
   };
 
+  const pastDue = () => {
+    var today: Date = new Date();
+    var date: Date = new Date(props.date);
+    return today > date;
+  };
+
   const updateFieldPopup = (
     <>
       {displayUpdateField ? (
@@ -87,6 +93,9 @@ const Task: React.FC<Props> = (props) => {
         onClick={(e) => {
           e.stopPropagation();
           updateDate();
+        }}
+        style={{
+          color: pastDue() ? "red" : "white",
         }}
       >
         {props.datestring}

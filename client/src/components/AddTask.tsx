@@ -11,6 +11,7 @@ const AddTask: React.FC<Props> = (props) => {
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
+  const [dateError, setDateError] = useState(false);
 
   const handleNameChange = (e: any) => {
     setName(e.target.value);
@@ -27,8 +28,20 @@ const AddTask: React.FC<Props> = (props) => {
     taskDate: string,
     taskDescription: string
   ) => {
-    if (taskName !== "" && taskDate !== "" && taskDescription !== "") {
-      props.submit(taskName, taskDate, taskDescription);
+    // Check if date is valid
+    var dateArr = taskDate.split("-");
+    var date = new Date(
+      parseInt(dateArr[2]),
+      parseInt(dateArr[0]) - 1,
+      parseInt(dateArr[1])
+    );
+    if (date instanceof Date && !isNaN(date.getTime())) {
+      if (taskName !== "" && taskDate !== "") {
+        props.submit(taskName, taskDate, taskDescription);
+      }
+    } else {
+      setDateError(true);
+      return;
     }
   };
   return (
@@ -40,7 +53,8 @@ const AddTask: React.FC<Props> = (props) => {
       />
       <input
         className="task-name-input font"
-        placeholder="Task Date..."
+        placeholder="Task Date (MM-DD-YYYY)..."
+        style={{ color: dateError ? "red" : "white" }}
         onChange={(e) => handleDateChange(e)}
       />
       <input
