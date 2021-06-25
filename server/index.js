@@ -5,18 +5,18 @@ const app = express();
 const mysql = require("mysql");
 const PORT = process.env.PORT || 3001;
 
-const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "password",
-  database: "tasksdb",
-});
 // const db = mysql.createPool({
-//   host: "us-cdbr-east-04.cleardb.com",
-//   user: "b3a38aebcb54d9",
-//   password: "4ff73320",
-//   database: "heroku_24cf52c9bb780c1",
+//   host: "localhost",
+//   user: "root",
+//   password: "password",
+//   database: "tasksdb",
 // });
+const db = mysql.createPool({
+  host: "us-cdbr-east-04.cleardb.com",
+  user: "b3a38aebcb54d9",
+  password: "4ff73320",
+  database: "heroku_24cf52c9bb780c1",
+});
 
 app.use(cors());
 app.use(express.json());
