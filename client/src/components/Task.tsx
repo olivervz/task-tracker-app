@@ -73,10 +73,22 @@ const Task: React.FC<Props> = (props) => {
   return !expanded ? (
     <div className="task" onClick={() => toggleExpand()}>
       {updateFieldPopup}
-      <div className="task-title font" onClick={updateName}>
+      <div
+        className="task-title font"
+        onClick={(e) => {
+          e.stopPropagation();
+          updateName();
+        }}
+      >
         {props.name}
       </div>
-      <div className="task-date font" onClick={updateDate}>
+      <div
+        className="task-date font"
+        onClick={(e) => {
+          e.stopPropagation();
+          updateDate();
+        }}
+      >
         {props.datestring}
       </div>
       <button
@@ -92,10 +104,22 @@ const Task: React.FC<Props> = (props) => {
   ) : (
     <div className="task-expanded" onClick={() => toggleExpand()}>
       {updateFieldPopup}
-      <div className="task-title font" onClick={updateName}>
+      <div
+        className="task-title font"
+        onClick={(e) => {
+          e.stopPropagation();
+          updateName();
+        }}
+      >
         {props.name}
       </div>
-      <div className="task-date font" onClick={updateDate}>
+      <div
+        className="task-date font"
+        onClick={(e) => {
+          e.stopPropagation();
+          updateDate();
+        }}
+      >
         {props.datestring}
       </div>
       <button
@@ -106,9 +130,15 @@ const Task: React.FC<Props> = (props) => {
       >
         X
       </button>
-      <p className="task-description font" onClick={updateDescription}>
-        {props.description}
-      </p>
+      <div
+        className="task-description"
+        onClick={(e) => {
+          e.stopPropagation();
+          updateDescription();
+        }}
+      >
+        <p className="task-description-text font">{props.description}</p>
+      </div>
     </div>
   );
 };

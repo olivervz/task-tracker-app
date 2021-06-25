@@ -1,6 +1,6 @@
 .task {
   display: inline-flex;
-  float: right;
+  /* float: right; */
   width: 526px;
   padding-left: 12px;
   margin-left: 5px;
@@ -28,12 +28,13 @@
 .task-title {
   font-size: 20px;
   margin-left: 0px;
-  margin-right: 12px;
   margin-top: 12px;
   height: 25px;
-  width: 325px;
+  width: 225px;
+  margin-right: 112px;
   line-height: 24px;
 }
+
 .task-date {
   font-size: 14px;
   margin-top: 12px;
@@ -43,11 +44,19 @@
   line-height: 24px;
 }
 .task-description {
-  font-size: 12px;
-  height: 100px;
+  height: 88px;
   width: 514px;
-  padding-right: 12px;
+  margin-right: 12px;
   word-break: break-all;
+  background-color: rgb(208, 208, 208);
+  border: 1px solid rgb(205, 205, 205);
+  border-radius: 8px;
+}
+.task-description-text {
+  font-size: 12px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .task-delete {
   margin-top: 12px;
@@ -63,7 +72,10 @@
   height: 25px;
 }
 
-.task-delete:hover {
+.task-delete,
+.task-title,
+.task-date,
+.task-description :hover {
   cursor: pointer;
 }
 
