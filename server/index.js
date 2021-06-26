@@ -1,8 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const app = express();
 const mysql = require("mysql");
+const dotenv = require("dotenv").config();
+const app = express();
 const PORT = process.env.PORT || 3001;
 
 // const db = mysql.createPool({
@@ -11,11 +12,12 @@ const PORT = process.env.PORT || 3001;
 //   password: "password",
 //   database: "tasksdb",
 // });
+
 const db = mysql.createPool({
-  host: "us-cdbr-east-04.cleardb.com",
-  user: "b3a38aebcb54d9",
-  password: "4ff73320",
-  database: "heroku_24cf52c9bb780c1",
+  host: process.env.SQL_HOST,
+  user: process.env.SQL_USER,
+  password: process.env.SQL_PASSWORD,
+  database: process.env.SQL_DATABASE,
 });
 
 app.use(cors());
@@ -23,7 +25,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/test", (req, res) => {
-  res.send("Works!");
+  res.send("asdf");
 });
 
 app.get("/api/get", (req, res) => {
