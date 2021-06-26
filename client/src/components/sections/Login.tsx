@@ -40,12 +40,14 @@ const Login: React.FC<Props> = (props) => {
     if (!checkFields()) {
       return;
     }
-    const loginInformationCorrect = props.checkLoginInformation(
+    const loginInformationCorrect = await props.checkLoginInformation(
       usernameState,
       passwordState
     );
     if (!loginInformationCorrect) {
-      const usernameAvailable = props.checkUsernameAvailable(usernameState);
+      const usernameAvailable = await props.checkUsernameAvailable(
+        usernameState
+      );
       if (usernameAvailable) {
         setErrorText("no user with that username exists");
         setUsernameError(true);
