@@ -6,19 +6,19 @@ const dotenv = require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// const db = mysql.createPool({
-//   host: "localhost",
-//   user: "root",
-//   password: "password",
-//   database: "tasksdb",
-// });
-
 const db = mysql.createPool({
-  host: process.env.SQL_HOST,
-  user: process.env.SQL_USER,
-  password: process.env.SQL_PASSWORD,
-  database: process.env.SQL_DATABASE,
+  host: "localhost",
+  user: "root",
+  password: "password",
+  database: "tasksdb",
 });
+
+// const db = mysql.createPool({
+//   host: process.env.SQL_HOST,
+//   user: process.env.SQL_USER,
+//   password: process.env.SQL_PASSWORD,
+//   database: process.env.SQL_DATABASE,
+// });
 
 app.use(cors());
 app.use(express.json());
@@ -89,20 +89,41 @@ app.put("/api/update", (req, res) => {
   });
 });
 
-// User validation
 app.get("/api/get-user/", (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-  console.log(username, password);
+  const username = req.query.username;
+  const password = req.query.password;
+  const sqlSelect = "SELECT id FROM users WHERE username = ? AND password = ?";
+  db.query(sqlSelect, [username, password], (err, result) => {
+    if (result.length == 0) {
+      res.send({ userExists: false, userId: null });
+    } else {
+      res.send({ userExists: true, userId: result[0].id });
+    }
+  });
 });
 app.get("/api/username-available", (req, res) => {
-  const username = req.body.username;
-  console.log(username);
+  const username = req.query.username;
+  const sqlSelect = "SELECT id FROM users WHERE username = ?";
+  db.query(sqlSelect, [username], (err, result) => {
+    if (result.length == 0) {
+      res.send({ usernameAvailable: true });
+    } else {
+      res.send({ usernameAvailable: false });
+    }
+  });
 });
+
 app.post("/api/add-user", (req, res) => {
   const username = req.body.username;
-  const password = req.body.username;
-  console.log(username, password);
+  const password = req.body.password;
+  const sqlInsert = "INSERT INTO users (username, password) VALUES (?,?);";
+  db.query(sqlInsert, [username, password], (err, result) => {
+    const sqlSelect =
+      "SELECT id FROM users WHERE username = ? AND password = ?";
+    db.query(sqlSelect, [username, password], (err, result) => {
+      res.send({ id: result[0].userId });
+    });
+  });
 });
 
 app.listen(PORT, () => {

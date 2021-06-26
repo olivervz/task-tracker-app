@@ -36,7 +36,7 @@ const Login: React.FC<Props> = (props) => {
     return true;
   };
 
-  const login = () => {
+  const login = async () => {
     if (!checkFields()) {
       return;
     }
@@ -56,11 +56,11 @@ const Login: React.FC<Props> = (props) => {
       return;
     }
   };
-  const signUp = () => {
+  const signUp = async () => {
     if (!checkFields()) {
       return;
     }
-    const usernameAvailable = props.checkUsernameAvailable(usernameState);
+    const usernameAvailable = await props.checkUsernameAvailable(usernameState);
     if (!usernameAvailable) {
       setErrorText("username taken");
       setUsernameError(true);
