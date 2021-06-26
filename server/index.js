@@ -89,6 +89,22 @@ app.put("/api/update", (req, res) => {
   });
 });
 
+// User validation
+app.get("/api/get-user/", (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  console.log(username, password);
+});
+app.get("/api/username-available", (req, res) => {
+  const username = req.body.username;
+  console.log(username);
+});
+app.post("/api/add-user", (req, res) => {
+  const username = req.body.username;
+  const password = req.body.username;
+  console.log(username, password);
+});
+
 app.listen(PORT, () => {
   console.log("listening on port: ", PORT);
 });
