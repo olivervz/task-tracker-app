@@ -75,7 +75,6 @@ const Login: React.FC<Props> = (props) => {
       <h1 className="font-title-login">Login / Sign-up</h1>
       <input
         className="input-field"
-        minLength={6}
         maxLength={16}
         onChange={(e) => {
           setUsernameState(e.target.value);
@@ -88,7 +87,6 @@ const Login: React.FC<Props> = (props) => {
       ></input>
       <input
         type="password"
-        minLength={6}
         maxLength={16}
         className="input-field"
         onChange={(e) => {
