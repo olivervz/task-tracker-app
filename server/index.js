@@ -12,13 +12,6 @@ const PORT = process.env.PORT || 3001;
 //   password: "password",
 //   database: "tasksdb",
 // });
-
-// const db = mysql.createPool({
-//   host: process.env.SQL_HOST,
-//   user: process.env.SQL_USER,
-//   password: process.env.SQL_PASSWORD,
-//   database: process.env.SQL_DATABASE,
-// });
 const db = mysql.createPool(process.env.CLEARDB_DATABASE_URL);
 
 app.use(cors());
@@ -31,7 +24,8 @@ app.get("/test", (req, res) => {
 
 app.get("/api/get", (req, res) => {
   const id = req.query.id;
-  const sqlSelect = "SELECT * FROM tasks WHERE id = ? ORDER BY date";
+  console.log(id);
+  const sqlSelect = "SELECT * FROM tasks WHERE userId = ? ORDER BY date";
   db.query(sqlSelect, [id], (err, result) => {
     if (err) {
       console.log(err);
