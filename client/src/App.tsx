@@ -28,7 +28,7 @@ function App() {
       setUserState({
         username: username,
         password: password,
-        id: response.data.userId,
+        id: response.data.id,
       });
       setLoggedInState(true);
       return true;
@@ -44,7 +44,7 @@ function App() {
     setUserState({
       username: username,
       password: password,
-      id: response.data.userId,
+      id: response.data.id,
     });
     setLoggedInState(true);
   };

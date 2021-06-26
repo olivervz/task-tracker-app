@@ -13,12 +13,13 @@ const PORT = process.env.PORT || 3001;
 //   database: "tasksdb",
 // });
 
-const db = mysql.createPool({
-  host: process.env.SQL_HOST,
-  user: process.env.SQL_USER,
-  password: process.env.SQL_PASSWORD,
-  database: process.env.SQL_DATABASE,
-});
+// const db = mysql.createPool({
+//   host: process.env.SQL_HOST,
+//   user: process.env.SQL_USER,
+//   password: process.env.SQL_PASSWORD,
+//   database: process.env.SQL_DATABASE,
+// });
+const db = mysql.createPool(process.env.CLEARDB_DATABASE_URL);
 
 app.use(cors());
 app.use(express.json());
@@ -30,7 +31,7 @@ app.get("/test", (req, res) => {
 
 app.get("/api/get", (req, res) => {
   const id = req.query.id;
-  const sqlSelect = "SELECT * FROM tasks WHERE userId = ? ORDER BY date";
+  const sqlSelect = "SELECT * FROM tasks WHERE id = ? ORDER BY date";
   db.query(sqlSelect, [id], (err, result) => {
     if (err) {
       console.log(err);
@@ -96,22 +97,24 @@ app.put("/api/update", (req, res) => {
 });
 
 app.get("/api/get-user/", (req, res) => {
+  console.log("get-user");
   const username = req.query.username;
   const password = req.query.password;
   const sqlSelect = "SELECT id FROM users WHERE username = ? AND password = ?";
   db.query(sqlSelect, [username, password], (err, result) => {
-    if (result.length == 0) {
-      res.send({ userExists: false, userId: null });
+    if (result.length === 0) {
+      res.send({ userExists: false, id: null });
     } else {
-      res.send({ userExists: true, userId: result[0].id });
+      res.send({ userExists: true, id: result[0].id });
     }
   });
 });
 app.get("/api/username-available", (req, res) => {
+  console.log("username-available");
   const username = req.query.username;
   const sqlSelect = "SELECT id FROM users WHERE username = ?";
   db.query(sqlSelect, [username], (err, result) => {
-    if (result.length == 0) {
+    if (result.length === 0) {
       res.send({ usernameAvailable: true });
     } else {
       res.send({ usernameAvailable: false });
@@ -127,7 +130,7 @@ app.post("/api/add-user", (req, res) => {
     const sqlSelect =
       "SELECT id FROM users WHERE username = ? AND password = ?";
     db.query(sqlSelect, [username, password], (err, result) => {
-      res.send({ id: result[0].userId });
+      res.send({ id: result[0].id });
     });
   });
 });
