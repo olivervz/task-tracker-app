@@ -5,10 +5,12 @@ import Login from "./components/sections/Login";
 import { useState } from "react";
 
 function App() {
-  const [usernameState, setUsernameState] = useState("");
-  const [passwordState, setPasswordState] = useState("");
   const [loggedInState, setLoggedInState] = useState(false);
-  const [userState, setUserState] = useState(0);
+  const [userState, setUserState] = useState({
+    username: "",
+    password: "",
+    id: -1,
+  });
   // const APIurl = "https://task-list-tracker.herokuapp.com";
   const APIurl = "http://localhost:3001";
 
@@ -23,8 +25,12 @@ function App() {
       params: { username: username, password: password },
     });
     if (response.data.userExists) {
+      setUserState({
+        username: username,
+        password: password,
+        id: response.data.userId,
+      });
       setLoggedInState(true);
-      setUserState(response.data.userId);
       return true;
     }
     return false;
@@ -35,13 +41,16 @@ function App() {
       username: username,
       password: password,
     });
-    setUserState(response.data.userId);
+    setUserState({
+      username: username,
+      password: password,
+      id: response.data.userId,
+    });
     setLoggedInState(true);
   };
-  const loginUser = (username: string, password: string) => {};
 
   return loggedInState ? (
-    <Main />
+    <Main user={userState} />
   ) : (
     <Login
       checkUsernameAvailable={(username: string) =>
@@ -52,9 +61,6 @@ function App() {
       }
       addUser={(username: string, password: string) =>
         addUser(username, password)
-      }
-      loginUser={(username: string, password: string) =>
-        loginUser(username, password)
       }
     />
   );

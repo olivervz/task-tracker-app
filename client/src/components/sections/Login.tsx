@@ -6,7 +6,6 @@ interface Props {
   checkUsernameAvailable: Function;
   checkLoginInformation: Function;
   addUser: Function;
-  loginUser: Function;
 }
 
 const Login: React.FC<Props> = (props) => {

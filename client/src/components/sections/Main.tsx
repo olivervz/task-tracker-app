@@ -5,7 +5,16 @@ import Axios from "axios";
 import "./Main.css";
 import { useState, useEffect } from "react";
 
-const Main = () => {
+interface User {
+  username: String;
+  password: String;
+  id: Number;
+}
+interface Props {
+  user: User;
+}
+
+const Main: React.FC<Props> = (props) => {
   type task = {
     name: string;
     date: string;
@@ -15,8 +24,8 @@ const Main = () => {
   };
   const [addTask, setAddTask] = useState(false);
   const [tasksState, setTasksState] = useState<task[]>([]);
-  // const APIurl = "https://task-list-tracker.herokuapp.com";
-  const APIurl = "http://localhost:3001";
+  const APIurl = "https://task-list-tracker.herokuapp.com";
+  // const APIurl = "http://localhost:3001";
 
   useEffect(() => {
     fetchTasks();
@@ -24,7 +33,9 @@ const Main = () => {
 
   const fetchTasks = () => {
     const url = APIurl + "/api/get";
-    Axios.get(url).then((response) => {
+    console.log(props.user.id);
+    Axios.get(url, { params: { id: props.user.id } }).then((response) => {
+      console.log(response.data);
       setTasksState(response.data);
     });
   };
@@ -43,6 +54,7 @@ const Main = () => {
       name: name,
       date: date,
       description: description,
+      id: props.user.id,
     }).then((result) => {
       setAddTask(false);
       fetchTasks();

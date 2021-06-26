@@ -6,19 +6,19 @@ const dotenv = require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "password",
-  database: "tasksdb",
-});
-
 // const db = mysql.createPool({
-//   host: process.env.SQL_HOST,
-//   user: process.env.SQL_USER,
-//   password: process.env.SQL_PASSWORD,
-//   database: process.env.SQL_DATABASE,
+//   host: "localhost",
+//   user: "root",
+//   password: "password",
+//   database: "tasksdb",
 // });
+
+const db = mysql.createPool({
+  host: process.env.SQL_HOST,
+  user: process.env.SQL_USER,
+  password: process.env.SQL_PASSWORD,
+  database: process.env.SQL_DATABASE,
+});
 
 app.use(cors());
 app.use(express.json());
@@ -29,8 +29,9 @@ app.get("/test", (req, res) => {
 });
 
 app.get("/api/get", (req, res) => {
-  const sqlSelect = "SELECT * FROM tasks ORDER BY date";
-  db.query(sqlSelect, (err, result) => {
+  const id = req.query.id;
+  const sqlSelect = "SELECT * FROM tasks WHERE userId = ? ORDER BY date";
+  db.query(sqlSelect, [id], (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -43,16 +44,21 @@ app.post("/api/insert", (req, res) => {
   const name = req.body.name;
   const description = req.body.description;
   const datestring = req.body.date;
+  const id = req.body.id;
   const date = new Date(req.body.date);
   const sqlInsert =
-    "INSERT INTO tasks (name, date, datestring, description) VALUES (?,?,?,?);";
-  db.query(sqlInsert, [name, date, datestring, description], (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(result);
+    "INSERT INTO tasks (name, date, datestring, description, userId) VALUES (?,?,?,?,?);";
+  db.query(
+    sqlInsert,
+    [name, date, datestring, description, id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
     }
-  });
+  );
 });
 
 app.delete("/api/delete/:id", (req, res) => {
