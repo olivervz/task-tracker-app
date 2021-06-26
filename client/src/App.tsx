@@ -11,8 +11,8 @@ function App() {
     password: "",
     id: -1,
   });
-  // const APIurl = "https://task-list-tracker.herokuapp.com";
-  const APIurl = "http://localhost:3001";
+  const APIurl = "https://task-list-tracker.herokuapp.com";
+  // const APIurl = "http://localhost:3001";
 
   const checkUsernameAvailible = async (username: string) => {
     const url = APIurl + "/api/username-available";
