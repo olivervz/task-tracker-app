@@ -24,8 +24,8 @@ const Main: React.FC<Props> = (props) => {
     };
     const [addTask, setAddTask] = useState(false);
     const [tasksState, setTasksState] = useState<task[]>([]);
-    // const APIurl = "https://task-list-tracker.herokuapp.com";
-    const APIurl = "http://localhost:3001";
+    const APIurl = "https://task-list-tracker.herokuapp.com";
+    // const APIurl = "http://localhost:3001";
 
     useEffect(() => {
         fetchTasks();
