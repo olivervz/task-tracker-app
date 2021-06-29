@@ -1,61 +1,61 @@
 .heading {
-  position: relative;
-  display: flex;
-  margin: 0 auto;
-  justify-content: center;
-  width: 550px;
-  height: 70px;
-  top: 22px;
+    position: relative;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    width: 550px;
+    height: 70px;
+    top: 22px;
 }
 
 .title {
-  font-size: 42px;
-  color: white;
-  margin-right: 157px;
-  line-height: 70px;
+    font-size: 42px;
+    color: white;
+    margin-right: 157px;
+    line-height: 70px;
 }
 
 .add-task {
-  height: 50px;
-  width: 128px;
-  font-size: 20px;
-  color: black;
-  border: 1px solid black;
-  background: white;
-  margin-top: 10px;
+    height: 50px;
+    width: 128px;
+    font-size: 20px;
+    color: black;
+    border: 1px solid black;
+    background: white;
+    margin-top: 10px;
 }
 
 .add-task:hover {
-  cursor: pointer;
-  background: rgb(247, 245, 245);
-  transform: scale(1.003);
-  transition: all 0.8s ease;
+    cursor: pointer;
+    background: rgb(247, 245, 245);
+    transform: scale(1.003);
+    transition: all 0.8s ease;
 }
 
 .font {
-  font-family: MontserratMedium;
-  font-style: normal;
-  font-weight: normal;
+    font-family: MontserratMedium;
+    font-style: normal;
+    font-weight: normal;
 }
 
 .font-title {
-  font-family: MontserratMedium;
-  font-style: normal;
-  font-weight: 450;
+    font-family: MontserratMedium;
+    font-style: normal;
+    font-weight: 450;
 }
 
 .font-add-task {
-  font-family: MontserratMedium;
-  font-style: normal;
-  font-weight: 450;
-  color: black;
+    font-family: MontserratMedium;
+    font-style: normal;
+    font-weight: 450;
+    color: black;
 }
 
 .page-mask {
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }

@@ -1,20 +1,20 @@
 .update-field-form {
-  position: fixed;
-  left: calc(50vw - 250px);
-  width: 500px;
-  height: 130px;
-  background-color: #404040;
-  border: 1px solid black;
+    position: fixed;
+    left: calc(50vw - 250px);
+    width: 500px;
+    height: 130px;
+    background-color: #404040;
+    border: 1px solid black;
 }
 
 .update-field-input {
-  padding: 0px;
-  margin-top: 20px;
-  margin-left: 19px;
-  background-color: #2b2b2b;
-  border: 0px;
-  width: 91%;
-  padding-left: 10px;
-  height: 30%;
-  font-size: 20px;
+    padding: 0px;
+    margin-top: 20px;
+    margin-left: 19px;
+    background-color: #2b2b2b;
+    border: 0px;
+    width: 91%;
+    padding-left: 10px;
+    height: 30%;
+    font-size: 20px;
 }

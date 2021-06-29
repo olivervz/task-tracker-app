@@ -1,70 +1,70 @@
 .add-task-form {
-  position: fixed;
-  left: calc(50vw - 250px);
-  width: 500px;
-  height: 260px;
-  background-color: #404040;
-  border: 1px solid black;
+    position: fixed;
+    left: calc(50vw - 250px);
+    width: 500px;
+    height: 260px;
+    background-color: #404040;
+    border: 1px solid black;
 }
 
 .task-name-input {
-  padding: 0px;
-  margin-top: 20px;
-  margin-left: 19px;
-  background-color: #2b2b2b;
-  border: 0px;
-  padding-left: 10px;
-  width: 90%;
-  height: 15%;
-  font-size: 20px;
+    padding: 0px;
+    margin-top: 20px;
+    margin-left: 19px;
+    background-color: #2b2b2b;
+    border: 0px;
+    padding-left: 10px;
+    width: 90%;
+    height: 15%;
+    font-size: 20px;
 }
 
 .add-task-form-footer {
-  margin-left: 19px;
-  width: 464px;
-  height: 50px;
+    margin-left: 19px;
+    width: 464px;
+    height: 50px;
 }
 
 .submit-button {
-  height: 40px;
-  width: 128px;
-  font-size: 16px;
-  font-weight: 700;
-  color: white;
-  border: 0px;
-  background: green;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  margin-top: 10px;
-  margin-right: 208px;
+    height: 40px;
+    width: 128px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    border: 0px;
+    background: green;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 10px;
+    margin-right: 208px;
 }
 
 .submit-button:hover {
-  cursor: pointer;
-  background: rgb(0, 105, 0);
-  transform: scale(1.003);
-  transition: all 0.8s ease;
+    cursor: pointer;
+    background: rgb(0, 105, 0);
+    transform: scale(1.003);
+    transition: all 0.8s ease;
 }
 
 .cancel-button {
-  height: 40px;
-  width: 128px;
-  font-size: 16px;
-  font-weight: 500;
-  border: 0px;
-  color: white;
-  background: red;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  margin-top: 10px;
+    height: 40px;
+    width: 128px;
+    font-size: 16px;
+    font-weight: 500;
+    border: 0px;
+    color: white;
+    background: red;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 10px;
 }
 
 .cancel-button:hover {
-  cursor: pointer;
-  background: rgb(221, 0, 0);
-  transition: all 0.3s ease;
+    cursor: pointer;
+    background: rgb(221, 0, 0);
+    transition: all 0.3s ease;
 }
 
 .font {
-  font-family: MontserratMedium;
-  font-style: normal;
-  font-weight: normal;
+    font-family: MontserratMedium;
+    font-style: normal;
+    font-weight: normal;
 }
