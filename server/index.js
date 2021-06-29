@@ -14,10 +14,7 @@ const PORT = process.env.PORT || 3001;
 //   password: "password",
 //   database: "tasksdb",
 // });
-const db = mysql.createPool(
-    process.env.CLEARDB_DATABASE_URL ||
-        "mysql://b3a38aebcb54d9:05d5cfb9bd885ab@us-cdbr-east-04.cleardb.com/heroku_24cf52c9bb780c1?reconnect=true"
-);
+const db = mysql.createPool(process.env.CLEARDB_DATABASE_URL);
 
 app.use(cors());
 app.use(express.json());
@@ -95,12 +92,16 @@ app.put("/api/update", (req, res) => {
 });
 
 app.get("/api/get-user/", (req, res) => {
-    console.log("get-user");
     const username = req.query.username;
     const password = req.query.password;
+    const jsshaObj = new jssha("SHA-512", "TEXT", {
+        encoding: "UTF8",
+    });
+    jsshaObj.update(password);
+    const hashedPassword = jsshaObj.getHash("HEX");
     const sqlSelect =
         "SELECT id FROM users WHERE username = ? AND password = ?";
-    db.query(sqlSelect, [username, password], (err, result) => {
+    db.query(sqlSelect, [username, hashedPassword], (err, result) => {
         if (result.length === 0) {
             res.send({ userExists: false, id: null });
         } else {
@@ -109,7 +110,6 @@ app.get("/api/get-user/", (req, res) => {
     });
 });
 app.get("/api/username-available", (req, res) => {
-    console.log("username-available");
     const username = req.query.username;
     const sqlSelect = "SELECT id FROM users WHERE username = ?";
     db.query(sqlSelect, [username], (err, result) => {
@@ -124,10 +124,11 @@ app.get("/api/username-available", (req, res) => {
 app.post("/api/add-user", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    const hashedPasswordObj = new jsSHA("SHA-512", password, {
+    const jsshaObj = new jssha("SHA-512", "TEXT", {
         encoding: "UTF8",
     });
-    console.log(hashedPasswordObj);
+    jsshaObj.update(password);
+    const hashedPassword = jsshaObj.getHash("HEX");
 
     const sqlInsert = "INSERT INTO users (username, password) VALUES (?,?);";
     db.query(sqlInsert, [username, hashedPassword], (err, result) => {
