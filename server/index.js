@@ -3,17 +3,10 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mysql = require("mysql");
 const jssha = require("jssha");
-const { default: jsSHA } = require("jssha");
-const dotenv = require("dotenv").config();
+const _ = require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// const db = mysql.createPool({
-//   host: "localhost",
-//   user: "root",
-//   password: "password",
-//   database: "tasksdb",
-// });
 const db = mysql.createPool(process.env.CLEARDB_DATABASE_URL);
 
 app.use(cors());
@@ -140,6 +133,4 @@ app.post("/api/add-user", (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
-    console.log("listening on port: ", PORT);
-});
+app.listen(PORT, () => {});

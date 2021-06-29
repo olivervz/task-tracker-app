@@ -19,8 +19,11 @@ const Task: React.FC<Props> = (props) => {
     const [displayUpdateField, setDisplayUpdateField] = useState(false);
     const [field, setField] = useState("");
     const [fieldValue, setFieldValue] = useState("");
-    const APIurl = "https://task-list-tracker.herokuapp.com";
-    // const APIurl = "http://localhost:3001"; //
+    const APIurl =
+        process.env.NODE_ENV === "development"
+            ? "http://localhost:3001"
+            : "https://task-list-tracker.herokuapp.com";
+
     const toggleExpand = () => {
         setExpanded(!expanded);
     };
@@ -64,6 +67,8 @@ const Task: React.FC<Props> = (props) => {
     const isToday = () => {
         var today: Date = new Date();
         var date: Date = new Date(props.date);
+        console.log(today.getMonth(), today.getDay(), today.getFullYear());
+        console.log(date.getMonth(), date.getDay(), date.getFullYear());
         if (
             today.getMonth() === date.getMonth() &&
             today.getDay() === date.getDay() &&

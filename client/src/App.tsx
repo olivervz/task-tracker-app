@@ -11,16 +11,20 @@ function App() {
         password: "",
         id: -1,
     });
-    const APIurl = "https://task-list-tracker.herokuapp.com";
-    // const APIurl = "http://localhost:3001";
+    const APIurl =
+        process.env.NODE_ENV === "development"
+            ? "http://localhost:3001"
+            : "https://task-list-tracker.herokuapp.com";
 
     const checkUsernameAvailible = async (username: string) => {
         const url = APIurl + "/api/username-available";
+        console.log(url);
         const response = await Axios.get(url, {
             params: { username: username },
         });
         return response.data.usernameAvailable;
     };
+
     const checkLoginInformation = async (
         username: string,
         password: string
@@ -40,6 +44,7 @@ function App() {
         }
         return false;
     };
+
     const addUser = async (username: string, password: string) => {
         const url = APIurl + "/api/add-user";
         const response = await Axios.post(url, {

@@ -24,8 +24,10 @@ const Main: React.FC<Props> = (props) => {
     };
     const [addTask, setAddTask] = useState(false);
     const [tasksState, setTasksState] = useState<task[]>([]);
-    const APIurl = "https://task-list-tracker.herokuapp.com";
-    // const APIurl = "http://localhost:3001";
+    const APIurl =
+        process.env.NODE_ENV === "development"
+            ? "http://localhost:3001"
+            : "https://task-list-tracker.herokuapp.com";
 
     useEffect(() => {
         fetchTasks();
@@ -33,9 +35,7 @@ const Main: React.FC<Props> = (props) => {
 
     const fetchTasks = () => {
         const url = APIurl + "/api/get";
-        console.log(props.user.id);
         Axios.get(url, { params: { id: props.user.id } }).then((response) => {
-            console.log(response.data);
             setTasksState(response.data);
         });
     };
